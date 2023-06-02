@@ -324,10 +324,55 @@ input:checked + .slider::before {
 
 .plus {
   position: absolute;
-  right: 3%;
-  top: 2%;
+  right: 2%;
+  top: 4.5%;
   background: #353945;
   padding: 3px 5px;
   border-radius: 50%;
   cursor: pointer;
 }
+
+.add-todo {
+  display: flex;
+}
+
+.describe-todo {
+  background: #191B20;
+  padding: 10px;
+  position: relative;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.add-todo input {
+  width: 70%;
+  background: none;
+  padding-left: 5px;
+  font-family: Poppins;
+  color:white;
+}
+
+.todo-one {
+  padding-left: 5px;
+  font-family: Poppins;
+  color:white;
+  font-size: 14px;
+}
+
+.describe {
+  width: 100%;
+  background: none;
+  padding-left: 5px;
+  font-family: Poppins;
+  color:white;
+  font-size: 11px;
+}
+
+.add-todo input::placeholder {
+  color: #6E6E6E;
+}
+
+.describe::placeholder {
+  color: #808191;
+}
+
