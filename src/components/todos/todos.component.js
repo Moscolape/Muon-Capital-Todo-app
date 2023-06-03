@@ -1,15 +1,64 @@
-import React from "react";
+import React, {useState} from "react";
+
+import { connect } from "react-redux";
+import { addTodos } from "../../redux/reducer";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { ReactComponent as Oval } from "../../assets/Oval 2.svg";
-import { ReactComponent as Edit } from "../../assets/Group 16106.svg";
+
+import TodoList from "../todolists/todolists.components";
 
 
 
-const Todos = () => {
+const mapStateToProps = (state) => {
+  return {
+    todos: state
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTodo: (obj) => dispatch(addTodos(obj)),
+  };
+};
+
+
+const Todos = (props) => {
+    const [todo, setTodo] = useState('');
+    const [description, setDescription] = useState('');
+    const [todoList, setTodoList] = useState([]);
+
+    const handleChange = (e) => {
+        setTodo(e.target.value);
+        e.preventDefault();
+    };
+
+    const handleChangeTwo = (p) => {
+        setDescription(p.target.value);
+        p.preventDefault();
+    };
+
+
+    const add = () => {
+        if (todo === "" || description === "") {
+            alert("Todo is empty!!");
+        } else {
+            const id = todoList.length + 1;
+            props.addTodo(setTodoList((prevState) => [
+                ...prevState, {
+                    id: id,
+                    task: todo,
+                    description: description
+                }
+            ]));
+            setTodo('');
+            setDescription('');
+        }
+    };
+
     return (
         <div className="todo-fragment">
             <div className="todolist-components">
@@ -19,30 +68,18 @@ const Todos = () => {
                         <div className="describe-todo">
                             <div className="add-todo">
                                 <span><Oval/></span>
-                                <input placeholder="Add Todo"/>
+                                <input type="text" onChange={(e) => handleChange(e)} value={todo} placeholder="Add Todo"/>
                             </div>
-                            <input className="describe" placeholder="Add Todo Description"/>
-                            <span className="plus"><FontAwesomeIcon icon={faPlus} /></span>
+                            <input onChange={(e) => handleChangeTwo(e)} value={description} type="text" className="describe" placeholder="Add Todo Description"/>
+                            <span className="plus-todo" onClick={() => add()}><FontAwesomeIcon icon={faPlus} /></span>
                         </div>
-                        <div className="describe-todo">
-                            <div className="add-todo">
-                                <span><Oval/></span>
-                                <span className="todo-one">Carrot</span>
-                            </div>
-                            <input className="describe" placeholder="Add Todo Description"/>
-                            <span className="plus"><Edit/></span>
-                        </div>
+                        {todoList.map(todoList =>
+                            <TodoList todoList = {todoList}/>
+                        )}
                     </div>
                     <div className="todo-pack">
                         <div className="todo-list">List: Empty List</div>
-                        <div className="describe-todo">
-                            <div className="add-todo">
-                                <span><Oval/></span>
-                                <input placeholder="Add Todo"/>
-                            </div>
-                            <input className="describe" placeholder="Add Todo Description"/>
-                            <span className="plus"><FontAwesomeIcon icon={faPlus} /></span>
-                        </div>
+                        <TodoList todoList = {todoList}/>
                     </div>
                     <div style={{position: 'relative'}}>
                         <input type="text" className="todo-list" placeholder="Add Todo-List"/>
@@ -58,4 +95,4 @@ const Todos = () => {
     )
 };
 
-export default Todos;
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);
