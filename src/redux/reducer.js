@@ -12,6 +12,12 @@ const addTodoReducer = createSlice({
       return state;
     },
 
+    // add new lists
+    addLists: (state, action) => {
+      state.push(action.payload);
+      return state;        
+    },
+
     //update todos
     updateTodos: (state, action) => {
       return state.map((todo) => {
@@ -29,6 +35,7 @@ const addTodoReducer = createSlice({
 
 export const {
   addTodos,
+  addLists,
   updateTodos
 } = addTodoReducer.actions;
 
