@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import { connect } from "react-redux";
 import { addTodos } from "../../redux/reducer";
@@ -29,7 +29,24 @@ const mapDispatchToProps = (dispatch) => {
 const Todos = (props) => {
     const [todo, setTodo] = useState('');
     const [description, setDescription] = useState('');
-    const [todoList, setTodoList] = useState([]);
+    const [todoList, setTodoList] = useState(() => {
+        // get the todos from localstorage
+        const savedTodos = localStorage.getItem("todolist");
+        // if there are todos stored
+        if (savedTodos) {
+        // return the parsed the JSON object back to a javascript object
+        return JSON.parse(savedTodos);
+        // otherwise
+        } else {
+        // return an empty array
+        return [];
+        }
+    });
+
+    useEffect(() => {
+        // set todos to localstorage
+        localStorage.setItem('todolist', JSON.stringify(todoList))
+    }, [todoList]);
 
     const handleChange = (e) => {
         setTodo(e.target.value);
@@ -41,7 +58,8 @@ const Todos = (props) => {
         p.preventDefault();
     };
 
-
+    
+    
     const add = () => {
         if (todo === "" || description === "") {
             alert("Todo is empty!!");
@@ -58,6 +76,7 @@ const Todos = (props) => {
             setDescription('');
         }
     };
+
 
     return (
         <div className="todo-fragment">
