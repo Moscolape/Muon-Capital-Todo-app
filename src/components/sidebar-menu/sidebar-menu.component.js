@@ -5,9 +5,7 @@ import { ReactComponent as SectionOneIcon } from "../../assets/Group 15792.svg";
 import { ReactComponent as SectionTwoIcon } from "../../assets/Group 15799.svg";
 import { ReactComponent as ShareIcon } from "../../assets/Share.svg";
 
-// function initialsHandler() {
-    
-// }
+
 
 const SidebarMenu = () => {
     return(
