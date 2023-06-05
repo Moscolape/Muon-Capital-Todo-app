@@ -1,13 +1,19 @@
-import React from "react";
-
 import { ReactComponent as Wallet } from "../../assets/Wallet.svg";
 import Todos from "../todos/todos.component";
 
-const Main = () => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
+const Main = (props) => {
     return(
-        <div className="main-component">
+        <div className={props.active ? "main-component-occupy" : "main-component"}>
             <div className="main-nav">
-                <span className="main-nav-text">Section</span>
+                <span className="main-nav-text">
+                    {props.active ? 
+                    <span onClick={props.clickIt}><FontAwesomeIcon icon={faArrowRight} /> Show sidebar</span>
+                    :
+                    <span>Section</span>}
+                </span>
                 <div className="e-wallet">
                     <div className="e-trf">
                         <Wallet/>

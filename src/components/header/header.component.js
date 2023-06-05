@@ -1,11 +1,11 @@
-import React from 'react';
+import { Head } from './header.styles';
 
 
 const Header = () => {
     return(
-        <div className = "head">
+        <Head>
             <p>Lorem Ipsum is simply dummy text of the printing</p>
-        </div>
+        </Head>
     )
 };
 

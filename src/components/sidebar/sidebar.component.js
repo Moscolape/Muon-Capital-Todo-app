@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React from "react";
 
 import { ReactComponent as SlideLeftIcon } from "../../assets/slide-left.svg";
 
@@ -9,28 +9,19 @@ import SalesButton from "../button/button.component";
 
 
 
-
-const Sidebar = () => {
+const Sidebar = (props) => {
     const string = 'Name';
     const initial = string.charAt(0);
 
 
-    const [isActive, setIsActive] = useState(true);
-
-    const hideSidebarHandler = () => {
-        // 👇️ toggle
-        setIsActive(false);
-    };
-
-
     return(
-        <div className={isActive ? "side-bar" : "side-bar"}>
+        <div className={props.active ? "hide-side-bar" : "side-bar"}>
             <div className="top-side-bar">
                 <div className="user-only">
                     <span className="initials">{initial}</span>
                     <span className="username">{string}</span>
                 </div>
-                <span onClick={hideSidebarHandler} className="slide"><SlideLeftIcon/></span>
+                <span onClick={props.clickIt} className="slide"><SlideLeftIcon/></span>
             </div>
             <SidebarMenu/>
             <SalesButton initial={initial}/>

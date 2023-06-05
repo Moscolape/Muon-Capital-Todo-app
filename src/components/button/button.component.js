@@ -1,14 +1,15 @@
 import React from "react";
+import { Buy, BuyButton, Initials, UserBuy } from "./button.styles";
 
 const SalesButton = (props) => {
     return(
-        <div className="buy">
-            <div className="user-buy">
-                <span className="initial">{props.initial}</span>
+        <Buy>
+            <UserBuy>
+                <Initials>{props.initial}</Initials>
                 <span>$0.90</span>
-            </div>
-            <button>Buy $XYZ</button>
-        </div>   
+            </UserBuy>
+            <BuyButton>Buy $XYZ</BuyButton>
+        </Buy>   
     )
 };
 

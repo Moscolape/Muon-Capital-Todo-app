@@ -9,7 +9,7 @@ import { ReactComponent as ShareIcon } from "../../assets/Share.svg";
 
 const SidebarMenu = () => {
     return(
-        <>
+        <div>
             <div className="home">
                 <HomeIcon/>
                 <span className="home-text">Home</span>
@@ -30,7 +30,7 @@ const SidebarMenu = () => {
                 <ShareIcon/>
                 <span className="home-text">Section 8</span>
             </div>
-        </>
+        </div>
     );
 }
 

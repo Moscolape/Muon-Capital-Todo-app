@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from "react";
 
 import { connect } from "react-redux";
-import { addTodos, addLists } from "../../redux/reducer";
+import { addTodos, addLists, updateTodos } from "../../redux/reducer";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { ReactComponent as Oval } from "../../assets/Oval 2.svg";
 
 import TodoList from "../todolists/todolists.components";
+import EditTodo from "../edit-todo/edit-todo.component";
+
+// import {edited} from "../todolists/todolists.components";
 
 
 
@@ -22,7 +24,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (obj) => dispatch(addTodos(obj)),
-    addList: (obj) => dispatch(addLists(obj))
+    addList: (obj) => dispatch(addLists(obj)),
+    updateTodo: (obj) => dispatch(updateTodos(obj))
   };
 };
 
@@ -32,7 +35,26 @@ const Todos = (props) => {
     const [description, setDescription] = useState('');
     const [newList, setNewList] = useState('');
 
-    const [newTodoList, setNewTodoList] = useState([]);
+    const [newTodoList, setNewTodoList] = useState(() => {
+        // get the todos from localstorage
+        const savedTodoLists = localStorage.getItem("new-todolist");
+        // if there are todos stored
+        if (savedTodoLists) {
+        // return the parsed JSON object back to a javascript object
+        return JSON.parse(savedTodoLists);
+        // otherwise
+        } else {
+        // return an empty array
+        return [];
+        }
+    });
+
+    useEffect(() => {
+        // set todolists to localstorage
+        localStorage.setItem('new-todolist', JSON.stringify(newTodoList))
+    }, [newTodoList]);
+
+
     const [todoList, setTodoList] = useState(() => {
         // get the todos from localstorage
         const savedTodos = localStorage.getItem("todolist");
@@ -61,15 +83,25 @@ const Todos = (props) => {
         setDescription(p.target.value);
         p.preventDefault();
     };
-
+    
     const handleChangeThree = (w) => {
         setNewList(w.target.value);
         w.preventDefault();
     };
+
+    const handleChangeFour = (f) => {
+        setTodo(f.target.value);
+        f.preventDefault();
+    };
+
+    const handleChangeFive = (q) => {
+        setDescription(q.target.value);
+        q.preventDefault();
+    };
     
     const add = () => {
         if (todo === "" || description === "") {
-            alert("Todo is empty!!");
+            alert("You tried to input an empty task and/or description!!");
         } else {
             const id = todoList.length + 1;
             props.addTodo(setTodoList((prevState) => [
@@ -95,7 +127,8 @@ const Todos = (props) => {
             ]))
             setNewList('');
         }
-    }
+    };
+
 
 
     return (
@@ -113,7 +146,9 @@ const Todos = (props) => {
                             <span className="plus-todo" onClick={() => add()}><FontAwesomeIcon icon={faPlus} /></span>
                         </div>
                         {todoList.map(todoList =>
+                        <div key={todoList.id}>
                             <TodoList todoList = {todoList}/>
+                        </div>
                         )}
                     </div>
                     {newTodoList.map(newList => 
@@ -122,9 +157,9 @@ const Todos = (props) => {
                         <div className="describe-todo">
                             <div className="add-todo">
                                 <span><Oval/></span>
-                                <input type="text" onChange={(e) => handleChange(e)} value={todo} placeholder="Add Todo"/>
+                                <input type="text" onChange={(f) => handleChangeFour(f)} value={todo} placeholder="Add Todo"/>
                             </div>
-                            <input onChange={(p) => handleChangeTwo(p)} value={description} type="text" className="describe" placeholder="Add Todo Description"/>
+                            <input onChange={(q) => handleChangeFive(q)} value={description} type="text" className="describe" placeholder="Add Todo Description"/>
                             <span className="plus-todo" onClick={() => add()}><FontAwesomeIcon icon={faPlus} /></span>
                         </div>
                     </div>)}
@@ -137,10 +172,7 @@ const Todos = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="edit">
-                <span><FontAwesomeIcon icon={faArrowLeft} /></span>
-                <span>Edit Todo</span>
-            </div>
+            <EditTodo todoList={todoList}/>
         </div>
     )
 };
