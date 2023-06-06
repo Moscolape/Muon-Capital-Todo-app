@@ -1,36 +1,36 @@
-import React from "react";
-
 import { ReactComponent as HomeIcon } from "../../assets/Category.svg";
 import { ReactComponent as SectionOneIcon } from "../../assets/Group 15792.svg";
 import { ReactComponent as SectionTwoIcon } from "../../assets/Group 15799.svg";
 import { ReactComponent as ShareIcon } from "../../assets/Share.svg";
 
+import { Home, HomeText } from "./sidebar-menu.styles";
+
 
 
 const SidebarMenu = () => {
     return(
-        <div>
-            <div className="home">
+        <>
+            <Home>
                 <HomeIcon/>
-                <span className="home-text">Home</span>
-            </div>
-            <div className="home">
+                <HomeText>Home</HomeText>
+            </Home>
+            <Home>
                 <SectionOneIcon/>
-                <span className="home-text">Section 1</span>
-            </div>
-            <div className="home">
+                <HomeText>Section 1</HomeText>
+            </Home>
+            <Home>
                 <SectionTwoIcon/>
-                <span className="home-text">Section 2</span>
-            </div>
-            <div className="home">
+                <HomeText>Section 2</HomeText>
+            </Home>
+            <Home>
                 <ShareIcon/>
-                <span className="home-text">Section 8</span>
-            </div>
-            <div className="home">
+                <HomeText>Section 8</HomeText>
+            </Home>
+            <Home>
                 <ShareIcon/>
-                <span className="home-text">Section 8</span>
-            </div>
-        </div>
+                <HomeText>Section 8</HomeText>
+            </Home>
+        </>
     );
 }
 

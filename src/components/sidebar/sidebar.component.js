@@ -1,4 +1,4 @@
-import React from "react";
+import styled from "styled-components";
 
 import { ReactComponent as SlideLeftIcon } from "../../assets/slide-left.svg";
 
@@ -6,7 +6,18 @@ import { ReactComponent as SlideLeftIcon } from "../../assets/slide-left.svg";
 import SidebarMenu from "../sidebar-menu/sidebar-menu.component";
 import ToggleMode from "../toggle-mode/toggle-mode.component";
 import SalesButton from "../button/button.component";
+import { Initials, Slide, TopSideBar, Username, UserOnly } from "./sidebar.styles";
 
+
+export const SideBar = styled.div`
+    width: ${(props) => props.active ? '0%' : '25%'};
+    height: 94.7%;
+    margin-top: ${(props) => props.active ? '4%' : '3.2%'};
+    background: ${(props) => props.theme.colorSideBarBackground};
+    color: white;
+    position: fixed;
+    transition: width 0.2s ease-in-out, margin-top 0.2s ease-in-out;
+`
 
 
 const Sidebar = (props) => {
@@ -15,18 +26,18 @@ const Sidebar = (props) => {
 
 
     return(
-        <div className={props.active ? "hide-side-bar" : "side-bar"}>
-            <div className="top-side-bar">
-                <div className="user-only">
-                    <span className="initials">{initial}</span>
-                    <span className="username">{string}</span>
-                </div>
-                <span onClick={props.clickIt} className="slide"><SlideLeftIcon/></span>
-            </div>
+        <SideBar>
+            <TopSideBar>
+                <UserOnly>
+                    <Initials>{initial}</Initials>
+                    <Username>{string}</Username>
+                </UserOnly>
+                <Slide onClick={props.clickIt}><SlideLeftIcon/></Slide>
+            </TopSideBar>
             <SidebarMenu/>
             <SalesButton initial={initial}/>
             <ToggleMode/>
-        </div>
+        </SideBar>
     );
 }
 

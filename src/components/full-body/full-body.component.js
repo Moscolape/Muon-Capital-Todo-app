@@ -3,7 +3,7 @@ import Main from "../main/main.component";
 import Sidebar from "../sidebar/sidebar.component";
 import { Flex } from "./full-body.styles";
 
-const FullBody = () => {
+const FullBody = ({toggleTheme}) => {
 
     const [isActive, setIsActive] = useState(false);
 
@@ -17,8 +17,8 @@ const FullBody = () => {
 
     return(
         <Flex>        
-            <Sidebar active={isActive} clickIt = {hideSidebarHandler}/>
-            <Main active={isActive} clickIt={showSidebarHandler}/>
+            <Sidebar toggleTheme = {toggleTheme} active={isActive} clickIt = {hideSidebarHandler}/>
+            <Main inactive={isActive} clickIt={showSidebarHandler}/>
         </Flex>
     )
 };
