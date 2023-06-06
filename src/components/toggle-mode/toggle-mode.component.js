@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
 import { ReactComponent as World } from "../../assets/Vector (1).svg";
 import { useState, useContext } from 'react';
@@ -23,6 +23,7 @@ const ToggleMode = () => {
             <span><World/></span>
             <label className="theme-switch">
                 <span className="world"><FontAwesomeIcon icon={faMoon} /></span>
+                <span className="world2"><FontAwesomeIcon icon={faSun} /></span>
                 <input type="checkbox" checked={isToggle} onChange={onToggle} />
                 <div className ="slider round"></div>
             </label>
