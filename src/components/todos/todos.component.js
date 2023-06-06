@@ -11,7 +11,7 @@ import { ReactComponent as Oval } from "../../assets/Oval 2.svg";
 import TodoList from "../todolists/todolists.components";
 import EditTodo from "../edit-todo/edit-todo.component";
 
-// import {edited} from "../todolists/todolists.components";
+import { Todolist } from "./todos.styles";
 
 
 
@@ -33,8 +33,11 @@ const mapDispatchToProps = (dispatch) => {
 const Todos = (props) => {
     const [todo, setTodo] = useState('');
     const [description, setDescription] = useState('');
-    const [newList, setNewList] = useState('');
 
+    const [secondTodo, setSecondTodo] = useState('');
+    const [secondDescription, setSecondDescription] = useState('');
+
+    
     const [newTodoList, setNewTodoList] = useState(() => {
         // get the todos from localstorage
         const savedTodoLists = localStorage.getItem("new-todolist");
@@ -64,15 +67,17 @@ const Todos = (props) => {
         return JSON.parse(savedTodos);
         // otherwise
         } else {
-        // return an empty array
-        return [];
+            // return an empty array
+            return [];
         }
     });
+
 
     useEffect(() => {
         // set todos to localstorage
         localStorage.setItem('todolist', JSON.stringify(todoList))
     }, [todoList]);
+
 
     const handleChange = (e) => {
         setTodo(e.target.value);
@@ -90,15 +95,17 @@ const Todos = (props) => {
     };
 
     const handleChangeFour = (f) => {
-        setTodo(f.target.value);
+        setSecondTodo(f.target.value);
         f.preventDefault();
     };
 
     const handleChangeFive = (q) => {
-        setDescription(q.target.value);
+        setSecondDescription(q.target.value);
         q.preventDefault();
     };
     
+    
+
     const add = () => {
         if (todo === "" || description === "") {
             alert("You tried to input an empty task and/or description!!");
@@ -115,6 +122,27 @@ const Todos = (props) => {
             setDescription('');
         }
     };
+
+    const addAgain = () => {
+        if (secondTodo === "" || secondDescription === "") {
+            alert("You tried to input an empty task and/or description!!");
+        } else {
+            const idtwo = newTodoList.length + 1;
+            props.addTodo(setNewTodoList((anotherState) => [
+                ...anotherState, {
+                    id: idtwo,
+                    task: secondTodo,
+                    description: secondDescription
+                }
+            ]));
+            setSecondTodo('');
+            setSecondDescription('');
+        }
+    };
+
+
+
+    const [newList, setNewList] = useState('');
 
     const addList = () => {
         if (newList === "") {
@@ -136,8 +164,8 @@ const Todos = (props) => {
             <div className="todolist-components">
                 <div className="todo-component">
                     <div className="todo-pack">
-                        <div className="todo-list">List: Things to Buy</div>
-                        <div className="describe-todo">
+                        <Todolist>List: Things to Buy</Todolist>
+                        <div data-aos="fade-up" className="describe-todo">
                             <div className="add-todo">
                                 <span><Oval/></span>
                                 <input type="text" onChange={(e) => handleChange(e)} value={todo} placeholder="Add Todo"/>
@@ -151,20 +179,21 @@ const Todos = (props) => {
                         </div>
                         )}
                     </div>
-                    {newTodoList.map(newList => 
-                    <div className="todo-pack">
-                        <div className="todo-list">List: {newList}</div>
-                        <div className="describe-todo">
+                    {newTodoList.map(newList =>
+                    <div key={newList.id} className="todo-pack">
+                        <Todolist>List: {newList}</Todolist>
+                        <div data-aos="fade-up"  className="describe-todo">
                             <div className="add-todo">
                                 <span><Oval/></span>
-                                <input type="text" onChange={(f) => handleChangeFour(f)} value={todo} placeholder="Add Todo"/>
+                                <input type="text" onChange={(f) => handleChangeFour(f)} value={secondTodo} placeholder="Add Todo"/>
                             </div>
-                            <input onChange={(q) => handleChangeFive(q)} value={description} type="text" className="describe" placeholder="Add Todo Description"/>
-                            <span className="plus-todo" onClick={() => add()}><FontAwesomeIcon icon={faPlus} /></span>
+                            <input onChange={(q) => handleChangeFive(q)} value={secondDescription} type="text" className="describe" placeholder="Add Todo Description"/>
+                            <span className="plus-todo" onClick={() => addAgain()}><FontAwesomeIcon icon={faPlus} /></span>
                         </div>
-                    </div>)}
-                    {/* {todoList.map(todoList =>
-                        <TodoList todoList = {todoList}/>
+                    </div>
+                    )}
+                    {/* {newTodoList.map(newTodoList =>
+                        <TodoList todoList = {newTodoList}/>
                     )} */}
                     <div style={{position: 'relative'}}>
                         <input onChange={(w) => handleChangeThree(w)} value={newList} type="text" className="todo-list" placeholder="Add Todo-List"/>

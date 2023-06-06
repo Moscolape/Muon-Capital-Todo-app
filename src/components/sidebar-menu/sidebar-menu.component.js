@@ -6,42 +6,31 @@ import { ReactComponent as ShareIcon } from "../../assets/Share.svg";
 import { Home, HomeText } from "./sidebar-menu.styles";
 
 
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-
-
-AOS.init({
-    delay: 200, // values from 0 to 3000, with step 50ms
-    duration: 1500, // values from 0 to 3000, with step 50ms
-    once: false, // whether animation should happen only once - while scrolling down
-    mirror: false, // whether elements should animate out while scrolling past them
-});
-
 
 const SidebarMenu = () => {
     return(
-        <>
-            <Home data-aos="fade-right">
+        <div data-aos="fade-down" data-aos-delay="400">
+            <Home>
                 <HomeIcon/>
                 <HomeText>Home</HomeText>
             </Home>
-            <Home data-aos="fade-right" data-aos-delay="400">
+            <Home>
                 <SectionOneIcon/>
                 <HomeText>Section 1</HomeText>
             </Home>
-            <Home data-aos="fade-right" data-aos-delay="600">
+            <Home>
                 <SectionTwoIcon/>
                 <HomeText>Section 2</HomeText>
             </Home>
-            <Home data-aos="fade-right" data-aos-delay="800">
+            <Home>
                 <ShareIcon/>
                 <HomeText>Section 8</HomeText>
             </Home>
-            <Home data-aos="fade-right" data-aos-delay="1000">
+            <Home>
                 <ShareIcon/>
                 <HomeText>Section 8</HomeText>
             </Home>
-        </>
+        </div>
     );
 }
 

@@ -5,7 +5,8 @@ export const darkTheme = {
   colorSideBarBackground: 'black',
   colorSideBarText: 'white',
   colorSideBarMenuText: '#848484',
-
+  colorTodolistBackground: '#242731',
+  colorDescribeBackground: '#191B20'
 };
 
 export const lightTheme = {
@@ -15,4 +16,6 @@ export const lightTheme = {
   colorSideBarBackground: 'white',
   colorSideBarText: 'black',
   colorSideBarMenuText: 'black',
+  colorTodolistBackground: 'white',
+  colorDescribeBackground: 'white'
 }

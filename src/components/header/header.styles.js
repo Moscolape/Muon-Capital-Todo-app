@@ -5,7 +5,7 @@ export const Head = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 5.3%;
+    height: 5.4%;
     background: ${(props) => props.theme.colorHeadBackground};
     color: ${(props) => props.theme.colorHeadText};
     font-size: 14px;

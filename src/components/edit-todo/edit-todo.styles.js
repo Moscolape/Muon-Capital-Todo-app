@@ -56,7 +56,8 @@ export const SaveTodo = styled.button`
   border: none;
   border-radius: 5px;
   font-family: Inter;
-  background: #3772FF;
-  color: white;
+  font-weight: bold;
+  background: ${(props) => props.theme.colorHeadBackground};
+  color: ${(props) => props.theme.colorHeadText};
   cursor: pointer;
 `

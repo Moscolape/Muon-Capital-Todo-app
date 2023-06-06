@@ -1,17 +1,25 @@
 // import { useState } from 'react';
+import { useContext } from 'react';
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
+
 import { Edit, FirstChild, SaveTodo, SecondChild, TaskDescription, TaskName } from './edit-todo.styles';
 
 
-const EditTodo = (props) => {
+import { TodoContext } from '../todolists/todolists.components';
 
-    // const {task, description} = todoList;
 
-    // const [editTask, setEditTask] = useState('');
-    // const [editDescription, setEditDescription] = useState('');
+const EditTodo = () => {
+
+    const value = useContext(TodoContext);
+
+    console.log(value);
+
+    // const [editTask, setEditTask] = useState(value.task);
+    // const [editDescription, setEditDescription] = useState(value.description);
 
     // const handleEditTask = (e) => {
     //     setEditTask(props.edit);

@@ -19,12 +19,12 @@ const ToggleMode = () => {
     }
     
     return(
-        <div class="theme-switch-wrapper">
+        <div className ="theme-switch-wrapper">
             <span><World/></span>
-            <label class="theme-switch">
+            <label className="theme-switch">
                 <span className="world"><FontAwesomeIcon icon={faMoon} /></span>
                 <input type="checkbox" checked={isToggle} onChange={onToggle} />
-                <div class="slider round"></div>
+                <div className ="slider round"></div>
             </label>
         </div>
     )
