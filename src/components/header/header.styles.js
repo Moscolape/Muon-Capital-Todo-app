@@ -13,4 +13,5 @@ export const Head = styled.div`
     position: fixed;
     z-index: 1000;
     transition: all 0.2s ease-in-out;
+    box-shadow: ${(props) => props.theme.shadowHead};
 `

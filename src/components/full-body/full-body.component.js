@@ -18,7 +18,7 @@ const FullBody = ({toggleTheme}) => {
     return(
         <Flex>        
             <Sidebar toggleTheme = {toggleTheme} active={isActive} clickIt = {hideSidebarHandler}/>
-            <Main inactive={isActive} clickIt={showSidebarHandler}/>
+            <Main active={isActive} clickIt={showSidebarHandler}/>
         </Flex>
     )
 };
