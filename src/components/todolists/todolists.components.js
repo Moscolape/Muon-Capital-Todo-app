@@ -42,10 +42,8 @@ const TodoList = ({todoList}) => {
                         <span className="todo-one">{task}</span>
                     </div>
                     <span className="describe">{description}</span>
-                    <span className="oval" title={todoList.id}><Edit/></span>
+                    <span className="oval"><Edit/></span>
                 </div>
-                {/* <div style={{width: '500px'}}><EditTodo edit={edit}/></div> */}
-                {/* <p>{edit}</p> */}
             </TodoContext.Provider>
         </>
     );

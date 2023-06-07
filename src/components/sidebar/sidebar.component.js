@@ -11,7 +11,7 @@ import { Initials, Slide, TopSideBar, Username, UserOnly } from "./sidebar.style
 
 export const SideBar = styled.div`
     width: ${(props) => props.active ? '0%' : '25%'};
-    height: 94.7%;
+    height: 95%;
     margin-top: ${(props) => props.active ? '4%' : '3.2%'};
     background: ${(props) => props.theme.colorSideBarBackground};
     color: white;

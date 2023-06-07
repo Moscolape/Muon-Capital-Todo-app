@@ -79,6 +79,27 @@ const Todos = (props) => {
     }, [todoList]);
 
 
+    const [secondTodoList, setSecondTodoList] = useState(() => {
+        // get the todos from localstorage
+        const savedTodos = localStorage.getItem("second-todolist");
+        // if there are todos stored
+        if (savedTodos) {
+        // return the parsed JSON object back to a javascript object
+        return JSON.parse(savedTodos);
+        // otherwise
+        } else {
+            // return an empty array
+            return [];
+        }
+    });
+
+
+    useEffect(() => {
+        // set todos to localstorage
+        localStorage.setItem('second-todolist', JSON.stringify(secondTodoList))
+    }, [secondTodoList]);
+
+
     const handleChange = (e) => {
         setTodo(e.target.value);
         e.preventDefault();
@@ -128,7 +149,7 @@ const Todos = (props) => {
             alert("You tried to input an empty task and/or description!!");
         } else {
             const idtwo = newTodoList.length + 1;
-            props.addTodo(setNewTodoList((anotherState) => [
+            props.addTodo(setSecondTodoList((anotherState) => [
                 ...anotherState, {
                     id: idtwo,
                     task: secondTodo,
@@ -140,13 +161,13 @@ const Todos = (props) => {
         }
     };
 
-
-
     const [newList, setNewList] = useState('');
 
     const addList = () => {
         if (newList === "") {
             alert("You tried to add an empty list")
+        } else if(newTodoList.length === 1) {
+            alert("Sorry! You can't have more than 2 lists at the same time")
         } else {
             props.addList(setNewTodoList((prev) => [
                 ...prev, [
@@ -163,9 +184,9 @@ const Todos = (props) => {
         <div className="todo-fragment">
             <div className="todolist-components">
                 <div className="todo-component">
-                    <div className="todo-pack">
+                    <div  data-aos="fade-down" className="todo-pack">
                         <Todolist>List: Things to Buy</Todolist>
-                        <div data-aos="fade-up" className="describe-todo">
+                        <div className="describe-todo">
                             <div className="add-todo">
                                 <span><Oval/></span>
                                 <input type="text" onChange={(e) => handleChange(e)} value={todo} placeholder="Add Todo"/>
@@ -179,10 +200,11 @@ const Todos = (props) => {
                         </div>
                         )}
                     </div>
+
                     {newTodoList.map(newList =>
-                    <div key={newList.id} className="todo-pack">
+                    <div  data-aos="fade-down" key={newList.id} className="todo-pack">
                         <Todolist>List: {newList}</Todolist>
-                        <div data-aos="fade-up"  className="describe-todo">
+                        <div className="describe-todo">
                             <div className="add-todo">
                                 <span><Oval/></span>
                                 <input type="text" onChange={(f) => handleChangeFour(f)} value={secondTodo} placeholder="Add Todo"/>
@@ -190,12 +212,15 @@ const Todos = (props) => {
                             <input onChange={(q) => handleChangeFive(q)} value={secondDescription} type="text" className="describe" placeholder="Add Todo Description"/>
                             <span className="plus-todo" onClick={() => addAgain()}><FontAwesomeIcon icon={faPlus} /></span>
                         </div>
+                        {secondTodoList.map(secondTodoList =>
+                        <div key={secondTodoList.id}>
+                            <TodoList todoList = {secondTodoList}/>
+                        </div>
+                        )}
                     </div>
                     )}
-                    {/* {newTodoList.map(newTodoList =>
-                        <TodoList todoList = {newTodoList}/>
-                    )} */}
-                    <div style={{position: 'relative'}}>
+
+                    <div data-aos="fade-down" style={{position: 'relative'}}>
                         <input onChange={(w) => handleChangeThree(w)} value={newList} type="text" className="todo-list" placeholder="Add Todo-List"/>
                         <span  onClick={() => addList()} className="plus"><FontAwesomeIcon icon={faPlus} /></span>
                     </div>

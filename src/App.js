@@ -15,19 +15,14 @@ export const AuthContext = createContext();
 
 const App = () => {
   
-  const [theme, setTheme] = useState( 'dark'
-    // JSON.parse(localStorage.getItem("theme")) || "light"
-  );
+  const [theme, setTheme] = useState("dark");
+
   
   const isDarkTheme = theme === 'dark';
   
   const toggleTheme = () => {
     setTheme(isDarkTheme ? 'light' : 'dark');
   }
-
-  // useEffect(() => {
-  //   localStorage.setItem("theme", JSON.stringify(theme));
-  // }, [theme]);
 
 
   return (

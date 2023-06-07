@@ -9,7 +9,7 @@ import { Home, HomeText } from "./sidebar-menu.styles";
 
 const SidebarMenu = () => {
     return(
-        <div data-aos="fade-down" data-aos-delay="400">
+        <div data-aos="zoom-in" data-aos-delay="600">
             <Home>
                 <HomeIcon/>
                 <HomeText>Home</HomeText>

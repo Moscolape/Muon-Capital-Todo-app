@@ -13,10 +13,14 @@ const ToggleMode = () => {
 
     const [isToggle, setIsToggle] = useState(false);
 
+
     const onToggle = () => {
         setIsToggle(!isToggle);
         value();
     }
+
+
+
     
     return(
         <div className ="theme-switch-wrapper">
